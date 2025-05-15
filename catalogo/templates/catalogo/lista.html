@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book List</title>
+  </head>
+  <body>
+    <h1>Lista de Libros</h1>
+
+    <ul>
+      {% for libro in libros %}
+      <li>
+        <strong> {{libro.titulo}}</strong><br />
+        Author: {{libro.autor}}<br />
+        Genero: {{libro.genero}} Editorial: {{libro.editorial}}<br />
+
+        <em>Reviews</em>
+        <ul>
+          {%for resena in libro.resena_set.all%}
+          <li>{{resena.texto}}</li>
+          {%empty%}
+          <li>No hay reseñas para este libro.</li>
+          {%endfor%}
+        </ul>
+      </li>
+      <hr />
+      {%endfor%}
+    </ul>
+  </body>
+</html>

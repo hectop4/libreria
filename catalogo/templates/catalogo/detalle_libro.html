@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Detalles de Libros</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .reseñas {
+        font-size: 0.9em;
+        color: #333;
+        margin-top: 5px;
+      }
+      h1 {
+        font-family: Arial, sans-serif;
+        color: #444;
+      }
+      ul {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Detalles de Libros</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Género</th>
+          <th>Editorial</th>
+          <th>País</th>
+          <th>Reseñas</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for libro in libros %}
+        <tr>
+          <td>{{ libro.titulo }}</td>
+          <td>{{ libro.autor }}</td>
+          <td>{{ libro.genero }}</td>
+          <td>{{ libro.editorial.nombre }}</td>
+          <td>{{ libro.editorial.pais }}</td>
+          <td>
+            {% if libro.resena_set.all %}
+            <ul class="reseñas">
+              {% for resena in libro.resena_set.all %}
+              <li>"{{ resena.texto }}" - {{ resena.puntuacion }}/5</li>
+              {% endfor %}
+            </ul>
+            {% else %} Sin reseñas. {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
